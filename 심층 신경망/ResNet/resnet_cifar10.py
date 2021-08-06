@@ -1,7 +1,7 @@
 import numpy as np
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.utils import plot_model
+from tensorflow.keras.utils import plot_model, to_categorical
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, ReduceLROnPlateau
 from resnet import resnet_v1, resnet_v2
 import os
@@ -35,9 +35,15 @@ n_dict = {20: 3, 32: 5, 44: 7, 56: 9, 110: 18}
 
 input_shape = x_train.shape[1:]
 
+x_train = x_train.astype('float32') / 255
+x_test = x_test.astype('float32') / 255
+
+y_train = to_categorical(y_train)
+y_test = to_categorical(y_test)
+
 # 하이퍼파라미터
 batch_size = 32
-epochs = 200
+epochs = 10
 num_classes = 10
 n = n_dict[20]
 
@@ -74,7 +80,7 @@ filepath = os.path.join(save_dir, model_name)
 
 # 모델 체크포인트
 checkpoint = ModelCheckpoint(filepath=filepath,
-                             monitor='val_acc',
+                             monitor='val_accuracy',
                              verbose=1,
                              save_best_only=True)
 

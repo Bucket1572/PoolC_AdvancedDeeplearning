@@ -22,7 +22,7 @@ def H(inputs,
     :param batch_normalization: 배치 정규화 여부
     :return: 출력 특징맵
     '''
-    conv = Conv2D(num_filters=num_filters,
+    conv = Conv2D(filters=num_filters,
                   kernel_size=kernel_size,
                   strides=strides,
                   padding='same',
@@ -133,7 +133,7 @@ def resnet_layer(inputs,
         x = transition(inputs=x,
                        num_filters=num_filters,
                        kernel_size=1,
-                       strides=strides)
+                       strides=downsample_strides_coef * strides)
 
     # 잔차 레이어 결과
     y = add([x, y])
