@@ -184,6 +184,7 @@ def resnet_v1(input_shape, depth, num_classes=10):
     model = Model(inputs=inputs, outputs=outputs)
     return model
 
+
 def resnet_v2(input_shape, depth, num_classes=10):
     if (depth - 2) % 9 != 0:
         raise ValueError('depth should be 9n + 2 (eg 56, 110 in [b])')
@@ -206,13 +207,13 @@ def resnet_v2(input_shape, depth, num_classes=10):
             strides = 1
             if stage == 0:
                 num_filters_out = num_filters_in * 4
-                if res_block == 0: # 맨 처음 잔차는 컨볼루션만
+                if res_block == 0:  # 맨 처음 잔차는 컨볼루션만
                     activation = None
                     batch_normalization = False
             else:
                 num_filters_out = num_filters_in * 2
-                if res_block == 0: # 전이 레이어
-                    strides = 2 # 다운샘플링
+                if res_block == 0:  # 전이 레이어
+                    strides = 2  # 다운샘플링
 
             # 병목 잔차 유닛
             y = H(inputs=x,
@@ -236,6 +237,7 @@ def resnet_v2(input_shape, depth, num_classes=10):
                                num_filters=num_filters_out,
                                kernel_size=1,
                                strides=strides)
+            x = add([x, y])
         num_filters_in = num_filters_out
 
     # 상단에 분류 모델 추가
