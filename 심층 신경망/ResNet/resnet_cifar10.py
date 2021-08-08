@@ -6,6 +6,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, R
 from resnet import resnet_v1, resnet_v2
 import os
 
+# Warning 끄기
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 
 def lr_schedule(epoch):
     '''
