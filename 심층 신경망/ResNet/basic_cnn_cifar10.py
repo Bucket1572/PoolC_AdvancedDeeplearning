@@ -6,6 +6,15 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten
 from tensorflow.keras.models import Model
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical, plot_model
+import tensorflow as tf
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        tf.config.experimental.set_memory_growth(gpus[0], True)
+    except RuntimeError as e:
+        # 프로그램 시작시에 메모리 증가가 설정되어야만 합니다
+        print(e)
 
 # 텐서플로의 GPU Warning 끄기
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -31,9 +40,9 @@ batch_size = 128
 kernel_size = 3
 filters = 64
 dropout = 0.3
-epochs = 10
+epochs = 100
 
-print(f"{x_test.shape}, {y_test.shape}")
+# print(f"{x_test.shape}, {y_test.shape}")
 
 # 함수형 API를 사용해 CNN 구축
 # 입력 계층
