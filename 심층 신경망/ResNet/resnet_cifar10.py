@@ -4,7 +4,16 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import plot_model, to_categorical
 from tensorflow.keras.callbacks import ModelCheckpoint, LearningRateScheduler, ReduceLROnPlateau
 from resnet import resnet_v1, resnet_v2
+import tensorflow as tf
 import os
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        tf.config.experimental.set_memory_growth(gpus[0], True)
+    except RuntimeError as e:
+        # 프로그램 시작시에 메모리 증가가 설정되어야만 합니다
+        print(e)
 
 # Warning 끄기
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -46,7 +55,7 @@ y_test = to_categorical(y_test)
 
 # 하이퍼파라미터
 batch_size = 32
-epochs = 20
+epochs = 100
 num_classes = 10
 n = n_dict[20]
 
