@@ -1,6 +1,5 @@
 PoolC_AdvancedDeeplearning
 ===
----
 개요
 ---
 이 Repository는 연세대학교의 동아리 PoolC 데이터 과공학 DB, ML, AI 스터디에서
