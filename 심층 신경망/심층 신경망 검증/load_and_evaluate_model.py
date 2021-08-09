@@ -7,7 +7,7 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # 로딩할 디렉토리
-dir = "../ResNet/saved_models/cifar10_resnet-v1_.010.h5"
+dir = "../ResNet/saved_models/cifar10_resnet-v2_.100.h5"
 model = load_model(dir)
 
 # 데이터셋 로드

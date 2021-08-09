@@ -62,7 +62,7 @@ n = n_dict[20]
 # 모델 버전
 # 최초 논문: version = 1 (ResNet v1)
 # 향상된 버전: version = 2 (ResNet v2)
-version = 1
+version = 2
 
 # 제공된 모델 하이퍼 파라미터 n으로부터 계산된 네트워크 깊이
 if version == 1:
